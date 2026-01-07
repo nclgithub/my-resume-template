@@ -19,7 +19,7 @@ export default function Navbar({ basePath = '' }: NavbarProps) {
   ];
 
   return (
-    <nav className="sticky flex items-center justify-center shadow-sm bg-white px-4 py-2 w-auto h-18 z-50">
+    <nav className="sticky flex items-center justify-center shadow-sm bg-white px-4 py-2 w-auto h-18 z-50 hidden">
       {links.map((link) => {
         const fullPath = basePath + link.href;
 

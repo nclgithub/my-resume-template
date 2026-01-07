@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @page: first {
   margin-top: 0mm;
@@ -14501,4 +14503,42 @@ video {
     opacity: 100%;
     transform: scale(0.95) rotate(0deg)
   }
+}
+
+.hrline-with-menu:hover .float-menu {
+  display: block;
+}
+
+.float-menu {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.section-cover {
+  position: absolute;
+  width: 100%;
+  height: calc(100% + 5.5rem);
+  top: -3rem;
+  background-color: rgb(200, 200, 200, 0.3);
+  z-index: 1;
+  display: none;
+}
+
+.section-group:has(.float-menu:hover) .section-cover {
+  display: block;
+}
+
+.bg-linear-to-r.from-gray-300.via-gray-500.to-gray-700 {
+  background-image: linear-gradient(
+    to right,
+    #ececec, /* gray-200 */
+    #e4e4e4 80%, /* gray-300 */
+    #ececec, /* gray-200 */
+    #e4e4e4 80%, /* gray-300 */
+    #ececec /* gray-200 */
+  );
 }

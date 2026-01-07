@@ -7,7 +7,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="flex flex-col min-h-screen">
+    <section className="flex flex-col h-screen">
         <Navbar basePath="/main" />
         {children}
     </section>

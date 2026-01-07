@@ -1,24 +1,32 @@
 import puppeteer from 'puppeteer';
 
-export async function GET() {
-    const browser = await puppeteer.launch();
+export async function POST(req) {
+    const data = await req.json();
+
+    const browser = await puppeteer.launch({
+        headless: 'new',
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+
     const page = await browser.newPage();
 
-    await page.goto('http://localhost:3000/pdf', { waitUntil: 'networkidle0' });
+    const url = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
-    const pdfBuffer = await page.pdf({
-        path: 'resume.pdf',
+    await page.goto(url + "/pdf?data=" + encodeURIComponent(JSON.stringify(data)), {
+        waitUntil: 'networkidle0',
+    });
+
+    const pdf = await page.pdf({
         format: 'A4',
         printBackground: true,
     });
 
-    await browser.close();
-    console.log('PDF generated successfully!');
+    await page.close();
 
-    return new Response(pdfBuffer, {
+    return new Response(pdf, {
         headers: {
-        "Content-Type": "application/pdf",
-        "Content-Disposition": "inline; filename=resume.pdf",
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename="resume.pdf"',
         },
     });
-};
+}

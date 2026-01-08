@@ -14505,8 +14505,13 @@ video {
   }
 }
 
+.avoid-page-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
 .hrline-with-menu:hover .float-menu {
-  display: block;
+  display: flex;
 }
 
 .float-menu {

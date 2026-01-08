@@ -12,6 +12,7 @@ export interface SectionData {
   id: string;
   type: string;
   title: string;
+  lock: boolean;
   contents: any[];
 }
 
@@ -19,6 +20,7 @@ export interface PointFormSection {
   id: string;
   type: string;
   title: string;
+  lock: boolean;
   details: string;
 }
 
@@ -27,6 +29,7 @@ export function newPointFormSection(): PointFormSection {
     id: uuidv4(),
     type: "1",
     title: "Title",
+    lock: false,
     details: "Details\nDetails\nDetails"
   };
 }
@@ -35,6 +38,7 @@ export interface ThreeColumnGridSection {
   id: string;
   type: string;
   title: string;
+  lock: boolean;
   details: string;
 }
 
@@ -43,7 +47,8 @@ export function newThreeColumnGridSection(): ThreeColumnGridSection {
     id: uuidv4(),
     type: "2",
     title: "Title",
-    details: "Details,Details,Details"
+    lock: false,
+    details: "Details,Details,Details,Details,Details,Details,Details"
   };
 }
 
@@ -51,6 +56,7 @@ export interface ContactSection {
   id: string;
   type: string;
   title: string;
+  lock: boolean;
   email: string;
   contact: string;
   location: string;
@@ -62,6 +68,7 @@ export function newContactSection(): ContactSection {
     id: uuidv4(),
     type: "3",
     title: "Title",
+    lock: true,
     email: "Email",
     contact: "Contact",
     location: "Location",
@@ -94,7 +101,8 @@ export function newExperienceSection(): SectionData {
     id: uuidv4(),
     type: "4",
     title: "Title",
-    contents: [newExperienceContent()]
+    lock: false,
+    contents: [newExperienceContent(), newExperienceContent()]
   };
 }
 
@@ -115,7 +123,8 @@ export function newLevelSection(): SectionData {
     id: uuidv4(),
     type: "5",
     title: "Title",
-    contents: [newLevelContent()]
+    lock: false,
+    contents: [newLevelContent(), newLevelContent(), newLevelContent()]
   };
 }
 
@@ -128,6 +137,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: "3",
       title: "Contact",
+      lock: true,
       email: "ngchunliangy@gmail.com",
       contact: "+65 8433 2042",
       location: "3 Ghim Moh Road #10-278 Singapore 270003.",
@@ -137,6 +147,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: "1",
       title: "Achievements",
+      lock: false,
       details:
         "Coordinated international business trips to Abu Dhabi, Saudi Arabia, and Thailand, delivering technical product demonstrations and supporting key client engagements. Led and executed on-site software deployment and optimized system performance based on customer insights, ensuring a high-quality user experience.\nSpearheaded the research and development of an AI-based image recognition model, and successfully integrated it with our company’s software solution, contributing to the enhancement of security systems for ICA at Woodlands Checkpoint."
     },
@@ -144,6 +155,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: "4",
       title: "Work Experience",
+      lock: false,
       contents: [
         {
           location: "Singapore",
@@ -178,6 +190,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: "4",
       title: "Education",
+      lock: false,
       contents: [
         {
           location: "Singapore",
@@ -225,6 +238,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: "2",
       title: "Skills",
+      lock: false,
       details:
         "C,C++,C#,HTML,CSS,PHP,Visual Basic,JavaScript,Python,Java,WPF,WinForms,React.JS,Node.JS,.NET,Bootstrap,Ant Design,Material UI,Label Studio,FiftyOne,LangChain,Microsoft Visual Studio,Visual Studio Code,GitHub,MongoDB,PostgreSQL,MySQL,XAMPP,Web API,Postman,Android Studio,Adobe Photoshop,Adobe Illustrator,Adobe Premiere,Adobe After Effect"
     },
@@ -232,6 +246,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: "5",
       title: "Languages",
+      lock: false,
       contents: [
         {
           subtitle: "English",

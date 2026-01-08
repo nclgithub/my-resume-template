@@ -40,20 +40,43 @@ export default function ResumeTemplate({ data }: { data: TemplateData }) {
           {data?.sections?.map((section, sectionindex) => {
             if (section.type === "1") {
               return (
-                <div key={section.id} className="px-12 avoid-page-break">
-                  {sectionindex !== 0 && (
-                    <div className="flex space-x-3">
-                      <div className="w-1/4 border-t-2 shrink-0 border-subtle"></div>
-                      <div className="border-t-2 grow border-subtle"></div>
+                <div key={section.id} className={"px-12 pb-3 " + (section.lock ? 'avoid-page-break' : '')}>
+                  <div className="avoid-page-break">
+                    {sectionindex !== 0 && (
+                      <div className="flex space-x-3">
+                        <div className="w-1/4 border-t-2 shrink-0 border-subtle"></div>
+                        <div className="border-t-2 grow border-subtle"></div>
+                      </div>
+                    )}
+                    <div className="flex pt-3 space-x-3">
+                      <div className="w-1/4 font-semibold uppercase shrink-0 border-subtle" style={{ color: "#8675A9" }}>
+                        {section.title}
+                      </div>
+                      <div className="grow border-subtle">
+                        <ul className="pl-4 mt-1 list-disc justify-text">
+                          {section.details
+                            .split("\n")
+                            .slice(0, 1)
+                            .map((item: string, index: number) => (
+                              <li key={section.id + index}>{item}</li>
+                            ))}
+                        </ul>
+                      </div>
                     </div>
-                  )}
-                  <div className="flex pb-3 py-3 space-x-3 avoid-page-break">
-                    <div className="w-1/4 font-semibold uppercase shrink-0 border-subtle" style={{ color: "#8675A9" }}>
-                      {section.title}
-                    </div>
+                  </div>
+                  <div className="flex space-x-3">
+                    <div className="w-1/4"></div>
                     <div className="grow border-subtle">
-                      <ul className="pl-4 mt-1 list-disc justify-text">
-                        {section.details && section.details.split("\n").map((item: string, index: number) => <li key={index}>{item}</li>)}
+                      <ul className="pl-4 list-disc justify-text">
+                        {section.details &&
+                          section.details
+                            .split("\n")
+                            .slice(1)
+                            .map((item: string, index: number) => (
+                              <li key={section.id + index} className="avoid-page-break">
+                                {item}
+                              </li>
+                            ))}
                       </ul>
                     </div>
                   </div>
@@ -61,67 +84,93 @@ export default function ResumeTemplate({ data }: { data: TemplateData }) {
               );
             } else if (section.type === "2") {
               return (
-                <div key={section.id} className="px-12 avoid-page-break">
-                  {sectionindex !== 0 && (
-                    <div className="flex space-x-3">
-                      <div className="w-1/4 border-t-2 shrink-0 border-subtle"></div>
-                      <div className="border-t-2 grow border-subtle"></div>
+                <div key={section.id} className={"px-12 pb-3 " + (section.lock ? 'avoid-page-break' : '')}>
+                  <div className="avoid-page-break">
+                    {sectionindex !== 0 && (
+                      <div className="flex space-x-3">
+                        <div className="w-1/4 border-t-2 shrink-0 border-subtle"></div>
+                        <div className="border-t-2 grow border-subtle"></div>
+                      </div>
+                    )}
+                    <div className="flex pt-3 space-x-3">
+                      <div className="w-1/4 font-semibold uppercase shrink-0 border-subtle" style={{ color: "#8675A9" }}>
+                        {section.title}
+                      </div>
+                      <div className="flex flex-wrap grow border-subtle">
+                        {section.details &&
+                          section.details
+                            .split(",")
+                            .slice(0, 3)
+                            .map((item: string, index: number) => (
+                              <div key={index} className="pr-2 w-1/3 overflow-hidden">
+                                {item}
+                              </div>
+                            ))}
+                      </div>
                     </div>
-                  )}
-                  <div className="flex pb-3 py-3 space-x-3 avoid-page-break">
-                    <div className="w-1/4 font-semibold uppercase shrink-0 border-subtle" style={{ color: "#8675A9" }}>
-                      {section.title}
-                    </div>
+                  </div>
+                  <div className="flex space-x-3">
+                    <div className="w-1/4"></div>
                     <div className="flex flex-wrap grow border-subtle">
                       {section.details &&
-                        section.details.split(",").map((item: string, index: number) => (
-                          <div key={index} className="pr-2 w-1/3 overflow-hidden">
-                            {item}
-                          </div>
-                        ))}
+                        section.details
+                          .split(",")
+                          .slice(3)
+                          .map((item: string, index: number) => (
+                            <div key={index} className="pr-2 w-1/3 overflow-hidden">
+                              {item}
+                            </div>
+                          ))}
                     </div>
                   </div>
                 </div>
               );
             } else if (section.type === "3") {
               return (
-                <div key={section.id} className="px-12">
-                  {sectionindex !== 0 && (
-                    <div className="flex space-x-3">
-                      <div className="w-1/4 border-t-2 shrink-0 border-subtle"></div>
-                      <div className="border-t-2 grow border-subtle"></div>
-                    </div>
-                  )}
-                  <div className="flex pb-3 py-3 space-x-3 avoid-page-break">
-                    <div className="w-1/4 font-semibold uppercase shrink-0" style={{ color: "#8675A9" }}>
-                      {section.title}
-                    </div>
-                    <div className="grow">
-                      <span className="flex items-center space-x-1">
-                        <span className="jlu-icon jlu-icon_mail-outline" style={{ width: "14px", height: "14px", color: "#8675A9" }}></span>{" "}
-                        <span className="no-underline">{section.email}</span>
-                      </span>
-                      <span className="flex items-center space-x-1">
-                        <span className="jlu-icon jlu-icon_call" style={{ width: "14px", height: "14px", color: "#8675A9" }}></span>{" "}
-                        <span className="no-underline">{section.contact}</span>
-                      </span>
-                      <span className="flex items-center space-x-1">
-                        <span className="jlu-icon jlu-icon_location_on" style={{ width: "14px", height: "14px", color: "#8675A9" }}></span>
-                        <span className="no-underline">{section.location}</span>
-                        <span style={{ display: "none" }}>,</span>
-                        <span style={{ display: "none" }}>,</span>
-                      </span>
-                      <a className="flex items-center space-x-1 no-underline" href={section.linkedIn} target="_blank">
-                        <span className="jlu-icon jlu-icon_linkedin" style={{ width: "14px", height: "14px", color: "#8675A9" }}></span>
-                        <span>{section.linkedIn}</span>
-                      </a>
+                <div key={section.id} className={"px-12 pb-3 " + (section.lock ? 'avoid-page-break' : '')}>
+                  <div className="avoid-page-break">
+                    {sectionindex !== 0 && (
+                      <div className="flex space-x-3">
+                        <div className="w-1/4 border-t-2 shrink-0 border-subtle"></div>
+                        <div className="border-t-2 grow border-subtle"></div>
+                      </div>
+                    )}
+                    <div className="flex pt-3 space-x-3">
+                      <div className="w-1/4 font-semibold uppercase shrink-0" style={{ color: "#8675A9" }}>
+                        {section.title}
+                      </div>
+                      <div className="grow">
+                        <span className="flex items-center space-x-1">
+                          <span className="jlu-icon jlu-icon_mail-outline" style={{ width: "14px", height: "14px", color: "#8675A9" }}></span>{" "}
+                          <span className="no-underline">{section.email}</span>
+                        </span>
+                      </div>
                     </div>
                   </div>
+                  <div className="flex space-x-3">
+                      <div className="w-1/4"></div>
+                      <div className="grow">
+                        <span className="flex items-center space-x-1">
+                          <span className="jlu-icon jlu-icon_call" style={{ width: "14px", height: "14px", color: "#8675A9" }}></span>{" "}
+                          <span className="no-underline">{section.contact}</span>
+                        </span>
+                        <span className="flex items-center space-x-1">
+                          <span className="jlu-icon jlu-icon_location_on" style={{ width: "14px", height: "14px", color: "#8675A9" }}></span>
+                          <span className="no-underline">{section.location}</span>
+                          <span style={{ display: "none" }}>,</span>
+                          <span style={{ display: "none" }}>,</span>
+                        </span>
+                        <a className="flex items-center space-x-1 no-underline" href={section.linkedIn} target="_blank">
+                          <span className="jlu-icon jlu-icon_linkedin" style={{ width: "14px", height: "14px", color: "#8675A9" }}></span>
+                          <span>{section.linkedIn}</span>
+                        </a>
+                      </div>
+                    </div>
                 </div>
               );
             } else if (section.type === "4") {
               return (
-                <div key={section.id} className="px-12">
+                <div key={section.id} className={"px-12 " + (section.lock ? 'avoid-page-break' : '')}>
                   <div className="avoid-page-break">
                     {sectionindex !== 0 && (
                       <div className="flex space-x-3">
@@ -132,45 +181,101 @@ export default function ResumeTemplate({ data }: { data: TemplateData }) {
                     <div className="py-3 font-semibold uppercase" style={{ color: "#8675A9" }}>
                       {section.title}
                     </div>
-                    {section.contents?.map((subSection: any, subIndex: number) => (
-                      <span key={section.id + subIndex}>
-                        <div className="flex pb-3 space-x-3 avoid-page-break">
-                          <div className="w-1/4 shrink-0 text-subtle">
-                            {subSection.location} <br />
-                            {subSection.durationstart} – {subSection.durationend}
-                          </div>
-                          <div className="grow">
-                            <div className="text-base" style={{ color: "#8675A9" }}>
-                              <span className="font-semibold">{subSection.subtitle}</span>
-                              <br />
-                              {subSection.organization}
-                            </div>
-                            <ul className="pl-4 mt-1 list-disc justify-text">
-                              {subSection.details && subSection.details.split("\n").map((item: string, index: number) => <li key={index}>{item}</li>)}
-                            </ul>
-                          </div>
+                    {section.contents?.slice(0, 1).map((subSection: any, subIndex: number) => (
+                      <div key={section.id + subIndex} className="flex pb-3 space-x-3">
+                        <div className="w-1/4 shrink-0 text-subtle">
+                          {subSection.location} <br />
+                          {subSection.durationstart} – {subSection.durationend}
                         </div>
-                      </span>
+                        <div className="grow">
+                          <div className="text-base" style={{ color: "#8675A9" }}>
+                            <span className="font-semibold">{subSection.subtitle}</span>
+                            <br />
+                            {subSection.organization}
+                          </div>
+                          <ul className="pl-4 mt-1 list-disc justify-text">
+                            {subSection.details && subSection.details.split("\n").map((item: string, index: number) => <li key={index}>{item}</li>)}
+                          </ul>
+                        </div>
+                      </div>
                     ))}
                   </div>
+                  {section.contents?.slice(1).map((subSection: any, subIndex: number) => (
+                    <div key={section.id + subIndex} className="flex pb-3 space-x-3 avoid-page-break">
+                      <div className="w-1/4 shrink-0 text-subtle">
+                        {subSection.location} <br />
+                        {subSection.durationstart} – {subSection.durationend}
+                      </div>
+                      <div className="grow">
+                        <div className="text-base" style={{ color: "#8675A9" }}>
+                          <span className="font-semibold">{subSection.subtitle}</span>
+                          <br />
+                          {subSection.organization}
+                        </div>
+                        <ul className="pl-4 mt-1 list-disc justify-text">
+                          {subSection.details && subSection.details.split("\n").map((item: string, index: number) => <li key={index}>{item}</li>)}
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               );
             } else if (section.type === "5") {
               return (
-                <div key={section.id} className="px-12 avoid-page-break">
-                  {sectionindex !== 0 && (
-                    <div className="flex space-x-3">
-                      <div className="w-1/4 border-t-2 shrink-0 border-subtle"></div>
-                      <div className="border-t-2 grow border-subtle"></div>
+                <div key={section.id} className={"px-12 pb-3 " + (section.lock ? 'avoid-page-break' : '')}>
+                  <div className="avoid-page-break">
+                    {sectionindex !== 0 && (
+                      <div className="flex space-x-3">
+                        <div className="w-1/4 border-t-2 shrink-0 border-subtle"></div>
+                        <div className="border-t-2 grow border-subtle"></div>
+                      </div>
+                    )}
+                    <div className="flex py-3 space-x-3">
+                      <div className="w-1/4 font-semibold uppercase shrink-0 border-subtle" style={{ color: "#8675A9" }}>
+                        {section.title}
+                      </div>
+                      <div className="grow border-subtle">
+                        <div className="flex flex-wrap -mt-3">
+                          {section.contents?.slice(0, 2).map((subSection: any, subIndex: number) => (
+                            <div key={section.id + subIndex} className="pr-6 flex flex-wrap pt-3 w-1/2">
+                              <span className="mr-1 grow">{subSection.subtitle}</span>
+                              <span className="text-subtle">
+                                {subSection.level == 1
+                                  ? "Beginner"
+                                  : subSection.level == 2
+                                  ? "Basic"
+                                  : subSection.level == 3
+                                  ? "Intermediate"
+                                  : subSection.level == 4
+                                  ? "Advanced"
+                                  : subSection.level == 5
+                                  ? "Expert"
+                                  : ""}
+                              </span>
+                              <div className="flex mt-1 space-x-1 w-full">
+                                {Array.from({ length: 5 }).map((_, eachindex) => {
+                                  if (eachindex < subSection.level) {
+                                    return (
+                                      <span style={{ backgroundColor: "#8675A9" }} className="h-1 grow bg-light" key={eachindex + eachindex}></span>
+                                    );
+                                  } else {
+                                    return (
+                                      <span style={{ backgroundColor: "#f4f4f4" }} className="h-1 grow bg-light" key={eachindex + eachindex}></span>
+                                    );
+                                  }
+                                })}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  )}
-                  <div className="flex pb-3 py-3 space-x-3 avoid-page-break">
-                    <div className="w-1/4 font-semibold uppercase shrink-0 border-subtle" style={{ color: "#8675A9" }}>
-                      {section.title}
-                    </div>
+                  </div>
+                  <div className="flex space-x-3 avoid-page-break">
+                    <div className="w-1/4"></div>
                     <div className="grow border-subtle">
                       <div className="flex flex-wrap -mt-3">
-                        {section.contents?.map((subSection: any, subIndex: number) => (
+                        {section.contents?.slice(2).map((subSection: any, subIndex: number) => (
                           <div key={section.id + subIndex} className="pr-6 flex flex-wrap pt-3 w-1/2">
                             <span className="mr-1 grow">{subSection.subtitle}</span>
                             <span className="text-subtle">

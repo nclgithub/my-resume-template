@@ -24,8 +24,6 @@ export async function POST(req) {
     waitUntil: "networkidle0",
   });
 
-  await page.waitForTimeout(1000);
-
   const pdf = await page.pdf({
     format: "A4",
     printBackground: true,

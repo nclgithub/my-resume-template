@@ -1,11 +1,28 @@
-import puppeteer from 'puppeteer';
+export const runtime = "nodejs";
 
 export async function POST(req) {
-    const data = await req.json();
+    let puppeteer, chromium, executablePath;
+    const isLocal = !process.env.NEXT_PUBLIC_SITE_URL;
 
+    if (isLocal)
+    {
+        puppeteer = await import("puppeteer").then(m => m.default);
+        executablePath = undefined;
+    }
+    else
+    {
+        puppeteer = await import("puppeteer-core").then(m => m.default);
+        chromium = await import("@sparticuz/chromium").then(m => m.default);
+        executablePath = await chromium.executablePath();
+    }
+
+    const data = await req.json();
+    
     const browser = await puppeteer.launch({
-        headless: 'new',
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        args: chromium?.args || [],
+        defaultViewport: chromium?.defaultViewport || null,
+        executablePath: executablePath,
+        headless: true,
     });
 
     const page = await browser.newPage();

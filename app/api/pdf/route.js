@@ -2,7 +2,7 @@ export const runtime = "nodejs";
 
 export async function POST(req) {
   const puppeteer = (await import("puppeteer-core")).default;
-  const chromium = (await import("@sparticuz/chromium-min")).default;
+  const chromium = (await import("@sparticuz/chromium")).default;
 
   const packUrl = "https://resume-print-three.vercel.app/chromium-pack.tar";
   const executablePath = await chromium.executablePath(packUrl);

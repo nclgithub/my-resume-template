@@ -52,28 +52,28 @@ export default function ResumeTemplate({ data }: { data: TemplateData }) {
                       <div className="w-1/4 font-semibold uppercase shrink-0 border-subtle" style={{ color: "#8675A9" }}>
                         {section.title}
                       </div>
-                      <div className="grow border-subtle">
+                      <div className="grow border-subtle min-w-0">
                         <ul className="pl-4 mt-1 list-disc justify-text">
                           {section.details
                             .split("\n")
                             .slice(0, 1)
                             .map((item: string, index: number) => (
-                              <li key={section.id + index}>{item}</li>
+                              <li key={section.id + index} className="break-words">{item}</li>
                             ))}
                         </ul>
                       </div>
                     </div>
                   </div>
                   <div className="flex space-x-3">
-                    <div className="w-1/4"></div>
-                    <div className="grow border-subtle">
+                    <div className="w-1/4 shrink-0"></div>
+                    <div className="grow border-subtle min-w-0">
                       <ul className="pl-4 list-disc justify-text">
                         {section.details &&
                           section.details
                             .split("\n")
                             .slice(1)
                             .map((item: string, index: number) => (
-                              <li key={section.id + index} className="avoid-page-break">
+                              <li key={section.id + index} className="avoid-page-break break-words">
                                 {item}
                               </li>
                             ))}
@@ -102,7 +102,7 @@ export default function ResumeTemplate({ data }: { data: TemplateData }) {
                             .split(",")
                             .slice(0, 3)
                             .map((item: string, index: number) => (
-                              <div key={index} className="pr-2 w-1/3 overflow-hidden">
+                              <div key={section.id + index} className="pr-2 w-1/3 break-words">
                                 {item}
                               </div>
                             ))}
@@ -110,14 +110,14 @@ export default function ResumeTemplate({ data }: { data: TemplateData }) {
                     </div>
                   </div>
                   <div className="flex space-x-3">
-                    <div className="w-1/4"></div>
-                    <div className="flex flex-wrap grow border-subtle">
+                    <div className="w-1/4 shrink-0"></div>
+                    <div className="flex flex-wrap grow border-subtle min-w-0">
                       {section.details &&
                         section.details
                           .split(",")
                           .slice(3)
                           .map((item: string, index: number) => (
-                            <div key={index} className="pr-2 w-1/3 overflow-hidden">
+                            <div key={section.id + index} className="pr-2 w-1/3 break-words">
                               {item}
                             </div>
                           ))}
@@ -187,14 +187,14 @@ export default function ResumeTemplate({ data }: { data: TemplateData }) {
                           {subSection.location} <br />
                           {subSection.durationstart} – {subSection.durationend}
                         </div>
-                        <div className="grow">
+                        <div className="grow min-w-0">
                           <div className="text-base" style={{ color: "#8675A9" }}>
                             <span className="font-semibold">{subSection.subtitle}</span>
                             <br />
                             {subSection.organization}
                           </div>
                           <ul className="pl-4 mt-1 list-disc justify-text">
-                            {subSection.details && subSection.details.split("\n").map((item: string, index: number) => <li key={index}>{item}</li>)}
+                            {subSection.details && subSection.details.split("\n").map((item: string, index: number) => <li key={section.id + index} className="break-words">{item}</li>)}
                           </ul>
                         </div>
                       </div>
@@ -206,14 +206,14 @@ export default function ResumeTemplate({ data }: { data: TemplateData }) {
                         {subSection.location} <br />
                         {subSection.durationstart} – {subSection.durationend}
                       </div>
-                      <div className="grow">
+                      <div className="grow min-w-0">
                         <div className="text-base" style={{ color: "#8675A9" }}>
                           <span className="font-semibold">{subSection.subtitle}</span>
                           <br />
                           {subSection.organization}
                         </div>
                         <ul className="pl-4 mt-1 list-disc justify-text">
-                          {subSection.details && subSection.details.split("\n").map((item: string, index: number) => <li key={index}>{item}</li>)}
+                          {subSection.details && subSection.details.split("\n").map((item: string, index: number) => <li key={section.id + index} className="break-words">{item}</li>)}
                         </ul>
                       </div>
                     </div>
@@ -238,20 +238,22 @@ export default function ResumeTemplate({ data }: { data: TemplateData }) {
                         <div className="flex flex-wrap -mt-3">
                           {section.contents?.slice(0, 2).map((subSection: any, subIndex: number) => (
                             <div key={section.id + subIndex} className="pr-6 flex flex-wrap pt-3 w-1/2">
-                              <span className="mr-1 grow">{subSection.subtitle}</span>
-                              <span className="text-subtle">
-                                {subSection.level == 1
-                                  ? "Beginner"
-                                  : subSection.level == 2
-                                  ? "Basic"
-                                  : subSection.level == 3
-                                  ? "Intermediate"
-                                  : subSection.level == 4
-                                  ? "Advanced"
-                                  : subSection.level == 5
-                                  ? "Expert"
-                                  : ""}
-                              </span>
+                              <div className="flex w-full items-start">
+                                <span className="mr-1 flex-1 min-w-0 break-words">{subSection.subtitle}</span>
+                                <span className="text-subtle whitespace-nowrap">
+                                  {subSection.level == 1
+                                    ? "Beginner"
+                                    : subSection.level == 2
+                                    ? "Basic"
+                                    : subSection.level == 3
+                                    ? "Intermediate"
+                                    : subSection.level == 4
+                                    ? "Advanced"
+                                    : subSection.level == 5
+                                    ? "Expert"
+                                    : ""}
+                                </span>
+                              </div>
                               <div className="flex mt-1 space-x-1 w-full">
                                 {Array.from({ length: 5 }).map((_, eachindex) => {
                                   if (eachindex < subSection.level) {
@@ -277,20 +279,22 @@ export default function ResumeTemplate({ data }: { data: TemplateData }) {
                       <div className="flex flex-wrap -mt-3">
                         {section.contents?.slice(2).map((subSection: any, subIndex: number) => (
                           <div key={section.id + subIndex} className="pr-6 flex flex-wrap pt-3 w-1/2">
-                            <span className="mr-1 grow">{subSection.subtitle}</span>
-                            <span className="text-subtle">
-                              {subSection.level == 1
-                                ? "Beginner"
-                                : subSection.level == 2
-                                ? "Basic"
-                                : subSection.level == 3
-                                ? "Intermediate"
-                                : subSection.level == 4
-                                ? "Advanced"
-                                : subSection.level == 5
-                                ? "Expert"
-                                : ""}
-                            </span>
+                            <div className="flex w-full items-start">
+                                <span className="mr-1 flex-1 min-w-0 break-words">{subSection.subtitle}</span>
+                                <span className="text-subtle whitespace-nowrap">
+                                  {subSection.level == 1
+                                    ? "Beginner"
+                                    : subSection.level == 2
+                                    ? "Basic"
+                                    : subSection.level == 3
+                                    ? "Intermediate"
+                                    : subSection.level == 4
+                                    ? "Advanced"
+                                    : subSection.level == 5
+                                    ? "Expert"
+                                    : ""}
+                                </span>
+                              </div>
                             <div className="flex mt-1 space-x-1 w-full">
                               {Array.from({ length: 5 }).map((_, eachindex) => {
                                 if (eachindex < subSection.level) {

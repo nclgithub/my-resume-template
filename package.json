@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.6",
     "@sparticuz/chromium": "^143.0.4",
+    "@sparticuz/chromium-min": "^143.0.4",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.4",
     "next": "^16.1.0",

@@ -2,7 +2,7 @@ export const runtime = "nodejs";
 
 export async function POST(req) {
   const puppeteer = (await import("puppeteer-core")).default;
-  const chromium = (await import("@sparticuz/chromium")).default;
+  const chromium = (await import("@sparticuz/chromium-min")).default;
 
   const executablePath = await chromium.executablePath();
   if (!executablePath) throw new Error("Chromium executable not found!");

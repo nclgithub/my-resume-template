@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/main/print/route.js"  ],
+, "app/main/print/route.js", "components/resume-temple-one"  ],
   "exclude": ["node_modules"]
 }

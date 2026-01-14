@@ -67,7 +67,7 @@ export function newContactSection(): ContactSection {
     id: uuidv4(),
     type: '3',
     title: 'Title',
-    lock: true,
+    lock: false,
     email: 'Email',
     contact: 'Contact',
     location: 'Location',
@@ -146,7 +146,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: '1',
       title: 'Achievements',
-      lock: false,
+      lock: true,
       details:
         'Coordinated international business trips to Abu Dhabi, Saudi Arabia, and Thailand, delivering technical product demonstrations and supporting key client engagements. Led and executed on-site software deployment and optimized system performance based on customer insights, ensuring a high-quality user experience.\nSpearheaded the research and development of an AI-based image recognition model, and successfully integrated it with our company’s software solution, contributing to the enhancement of security systems for ICA at Woodlands Checkpoint.',
     },
@@ -154,7 +154,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: '4',
       title: 'Work Experience',
-      lock: false,
+      lock: true,
       contents: [
         {
           location: 'Singapore',
@@ -189,7 +189,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: '4',
       title: 'Education',
-      lock: false,
+      lock: true,
       contents: [
         {
           location: 'Singapore',
@@ -240,7 +240,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: '2',
       title: 'Skills',
-      lock: false,
+      lock: true,
       details:
         'C,C++,C#,HTML,CSS,PHP,Visual Basic,JavaScript,Python,Java,WPF,WinForms,React.JS,Node.JS,.NET,Bootstrap,Ant Design,Material UI,Label Studio,FiftyOne,LangChain,Microsoft Visual Studio,Visual Studio Code,GitHub,MongoDB,PostgreSQL,MySQL,XAMPP,Web API,Postman,Android Studio,Adobe Photoshop,Adobe Illustrator,Adobe Premiere,Adobe After Effect',
     },
@@ -248,7 +248,7 @@ export const sampleData: TemplateData = {
       id: uuidv4(),
       type: '5',
       title: 'Languages',
-      lock: false,
+      lock: true,
       contents: [
         {
           subtitle: 'English',

@@ -42,12 +42,13 @@ const styles = StyleSheet.create({
   },
   listContent: {
     flexDirection: "row",
-    marginLeft: 3,
+    marginLeft: 3
   },
   listItem: {
     marginLeft: 4,
     wordBreak: "break-word",
-    lineHeight: 0.9
+    lineHeight: 0.9,
+    textAlign: "justify"
   },
   secondContentRow: {
     flexDirection: "row",

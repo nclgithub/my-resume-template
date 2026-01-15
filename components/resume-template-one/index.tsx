@@ -52,6 +52,8 @@ const styles = StyleSheet.create({
   }
 });
 
+Font.registerHyphenationCallback(word => [word]);
+
 export default function ResumeTemplateOne({ data }: { data: TemplateData }) {
   return (
     <Document>

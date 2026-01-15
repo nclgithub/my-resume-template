@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     marginTop: -12,
     minWidth: 0,
-    flexDirection: "row"
+    flexDirection: "row",
+    marginLeft: 2
   },
   skillItem: {
     width: "50%",

@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
   contentRow: {
     flexDirection: "row",
     paddingBottom: 6,
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    marginLeft: 2
   },
   leftColumn: {
     flexBasis: "25%",
@@ -45,23 +46,26 @@ const styles = StyleSheet.create({
   },
   subtitleText: {
     color: "#8675A9",
-    marginBottom: 3
+    marginBottom: 5,
+    fontSize: 12
   },
   subtitleBold: {
     fontWeight: 600,
-    lineHeight: 0.9
+    lineHeight: 1
   },
   listContent: {
     flexDirection: "row",
-    marginLeft: 3,
+    marginLeft: 3
   },
   listItem: {
     marginLeft: 4,
     wordBreak: "break-word",
-    lineHeight: 0.9
+    lineHeight: 0.9,
+    textAlign: "justify"
   },
   text: {
-    lineHeight: 0.9
+    lineHeight: 0.9,
+    textAlign: "justify"
   }
 });
 
@@ -83,7 +87,7 @@ export default function TemplateOneSectionThree({ section, isFirst }: { section:
           <View key={subIndex}>
             <View style={styles.contentRow}>
               <View style={styles.leftColumn}>
-                <Text style={{ lineHeight: 0.9 }}>{subSection.location}</Text>
+                <Text style={{ lineHeight: 0.9, textAlign: "justify" }}>{subSection.location}</Text>
                 <Text>
                   {subSection.durationstart} – {subSection.durationend}
                 </Text>
@@ -97,9 +101,7 @@ export default function TemplateOneSectionThree({ section, isFirst }: { section:
                   subSection.details.split("\n").map((item: any, index: number) => (
                     <View key={index} style={styles.listContent}>
                       <Text>{"\u2022"}</Text>
-                      <Text style={styles.listItem}>
-                        {item}
-                      </Text>
+                      <Text style={styles.listItem}>{item}</Text>
                     </View>
                   ))}
               </View>
@@ -125,9 +127,7 @@ export default function TemplateOneSectionThree({ section, isFirst }: { section:
                 subSection.details.split("\n").map((item: any, index: number) => (
                   <View key={index} style={styles.listContent}>
                     <Text>{"\u2022"}</Text>
-                    <Text style={styles.listItem}>
-                      {item}
-                    </Text>
+                    <Text style={styles.listItem}>{item}</Text>
                   </View>
                 ))}
             </View>

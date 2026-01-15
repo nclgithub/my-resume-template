@@ -38,17 +38,19 @@ const styles = StyleSheet.create({
   sectionDetails: {
     flex: 1,
     minWidth: 0,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginLeft: 2
   },
   itemBox: {
     flexBasis: "33%",
     paddingRight: 24,
     wordBreak: "break-word",
-    lineHeight: 0.9
+    lineHeight: 0.9,
+    textAlign: "justify"
   },
   secondContentRow: {
-    flexDirection: "row",
+    flexDirection: "row"
   }
 });
 

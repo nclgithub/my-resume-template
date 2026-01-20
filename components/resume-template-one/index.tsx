@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     position: "relative",
-    paddingHorizontal: 48,
+    paddingHorizontal: 36,
     marginBottom: 12,
     fontSize: 18,
     fontWeight: 600,
@@ -43,10 +43,10 @@ const styles = StyleSheet.create({
   },
   profilePic: {
     position: "absolute",
-    right: 48,
-    top: 24,
-    width: 180,
-    height: 180,
+    right: 36,
+    top: 20,
+    width: 130,
+    height: 130,
     borderRadius: 90,
     objectFit: "cover"
   }

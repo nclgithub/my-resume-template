@@ -38,7 +38,7 @@ export default function ResumePDF() {
       newExperienceSection(),
       newExperienceSection(),
       newThreeColumnGridSection(),
-      newLevelSection(),
+      newLevelSection()
     ]
   });
 
@@ -884,7 +884,7 @@ export default function ResumePDF() {
         </div>
       </div>
       <div className="relative md:col-span-3 min-h-0">
-        <div className="absolute top-0 left-0 right-0 bottom-0 p-8 bg-gray-200 opacity-100 rounded-lg overflow-auto">
+        <div className="absolute top-0 left-0 right-0 bottom-0 p-8 bg-gray-200 rounded-lg overflow-auto">
           <ResumePreview data={data} />
         </div>
         <div className="absolute right-0 bottom-0 pr-6 pb-6 mb:pr-8 mb:pb-8">

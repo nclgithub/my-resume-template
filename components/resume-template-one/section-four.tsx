@@ -3,16 +3,18 @@ import { SectionData } from "@/param/datatype";
 
 const styles = StyleSheet.create({
   sectionMain: {
-    display: "flex",
     paddingLeft: 36,
-    paddingRight: 36
+    paddingRight: 36,
+    paddingBottom: 3
   },
   dividerRow: {
+    display: "flex",
     flexDirection: "row"
   },
   dividerSmall: {
     flexBasis: "25%",
     borderTopWidth: 2,
+    borderStyle: "solid",
     borderTopColor: "#c6c9ce",
     flexShrink: 0,
     marginRight: 12
@@ -20,40 +22,55 @@ const styles = StyleSheet.create({
   dividerLarge: {
     flex: 1,
     borderTopWidth: 2,
+    borderStyle: "solid",
     borderTopColor: "#c6c9ce"
   },
   sectionTitle: {
-    paddingVertical: 9,
+    display: "flex",
+    flexDirection: "column",
+    paddingTop: 9,
+    paddingBottom: 9,
     fontWeight: 600,
     textTransform: "uppercase",
     color: "#8675A9"
   },
+  subSectionMargin: {
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: 3
+  },
   contentRow: {
+    display: "flex",
     flexDirection: "row",
-    paddingBottom: 6,
-    flexWrap: "wrap",
-    marginLeft: 2
+    flexWrap: "wrap"
   },
   leftColumn: {
     flexBasis: "25%",
-    flexShrink: 0,
     color: "#6B7280",
-    marginRight: 12
+    flexShrink: 0,
+    marginRight: 12,
+    lineHeight: 0.9
   },
   rightColumn: {
     flex: 1,
     minWidth: 0
   },
-  subtitleText: {
-    color: "#8675A9",
-    marginBottom: 5,
-    fontSize: 12
-  },
   subtitleBold: {
     fontWeight: 600,
     lineHeight: 1
   },
+  subtitleColor: {
+    color: "#8675A9",
+    fontSize: 12
+  },
+  detailsContent: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginLeft: 3
+  },
   listContent: {
+    display: "flex",
     flexDirection: "row",
     marginLeft: 3
   },
@@ -61,11 +78,23 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     wordBreak: "break-word",
     lineHeight: 0.9,
+    flexGrow: 1,
+    flexBasis: 0,
     textAlign: "justify"
   },
-  text: {
-    lineHeight: 0.9,
-    textAlign: "justify"
+  lessMargin: {
+    marginBottom: -1
+  },
+  moreMargin: {
+    marginBottom: 6
+  },
+  listFontWeight: {
+    fontWeight: 600,
+    textTransform: "uppercase",
+    fontSize: 16
+  },
+  commonLineHeight: {
+    lineHeight: 0.9
   }
 });
 
@@ -84,54 +113,76 @@ export default function TemplateOneSectionThree({ section, isFirst }: { section:
         <Separator />
         <Text style={styles.sectionTitle}>{section.title}</Text>
         {section.contents?.slice(0, 1).map((subSection, subIndex) => (
-          <View key={subIndex}>
-            <View style={styles.contentRow}>
+          <View key={subIndex} style={styles.subSectionMargin}>
+            <View style={{ ...styles.contentRow, ...styles.lessMargin }}>
               <View style={styles.leftColumn}>
-                <Text style={{ lineHeight: 0.9, textAlign: "justify" }}>{subSection.location}</Text>
+                <Text>{subSection.location}</Text>
+              </View>
+              <View style={styles.rightColumn}>
+                <Text style={{ ...styles.subtitleBold, ...styles.subtitleColor }}>{subSection.subtitle}</Text>
+              </View>
+            </View>
+            <View style={{ ...styles.contentRow, ...styles.moreMargin }}>
+              <View style={styles.leftColumn}>
                 <Text>
                   {subSection.durationstart} – {subSection.durationend}
                 </Text>
               </View>
               <View style={styles.rightColumn}>
-                <View style={styles.subtitleText}>
-                  <Text style={styles.subtitleBold}>{subSection.subtitle}</Text>
-                  <Text style={styles.text}>{subSection.organization}</Text>
-                </View>
-                {subSection.details &&
-                  subSection.details.split("\n").map((item: any, index: number) => (
-                    <View key={index} style={styles.listContent}>
-                      <Text>{"\u2022"}</Text>
-                      <Text style={styles.listItem}>{item}</Text>
-                    </View>
-                  ))}
+                <Text style={styles.subtitleColor}>{subSection.organization}</Text>
               </View>
             </View>
+            {subSection.details &&
+              subSection.details.split("\n").map((item: any, index: number) => (
+                <View key={index} style={styles.detailsContent}>
+                  <View style={{ ...styles.leftColumn, ...styles.listFontWeight, ...styles.commonLineHeight }}>
+                    <Text>&nbsp;</Text>
+                  </View>
+                  <View style={styles.rightColumn}>
+                    <View style={styles.listContent}>
+                      <Text style={styles.commonLineHeight}>{"\u2022"}</Text>
+                      <Text style={styles.listItem}>{item}</Text>
+                    </View>
+                  </View>
+                </View>
+              ))}
           </View>
         ))}
       </View>
       {section.contents?.slice(1).map((subSection, subIndex) => (
-        <View key={subIndex} wrap={false}>
-          <View style={styles.contentRow}>
+        <View key={subIndex} style={styles.subSectionMargin}>
+          <View style={{ ...styles.contentRow, ...styles.lessMargin }}>
             <View style={styles.leftColumn}>
-              <Text style={styles.text}>{subSection.location}</Text>
-              <Text style={styles.text}>
+              <Text>{subSection.location}</Text>
+            </View>
+            <View style={styles.rightColumn}>
+              <Text style={{ ...styles.subtitleBold, ...styles.subtitleColor }}>{subSection.subtitle}</Text>
+            </View>
+          </View>
+          <View style={{ ...styles.contentRow, ...styles.moreMargin }}>
+            <View style={styles.leftColumn}>
+              <Text>
                 {subSection.durationstart} – {subSection.durationend}
               </Text>
             </View>
             <View style={styles.rightColumn}>
-              <View style={styles.subtitleText}>
-                <Text style={styles.subtitleBold}>{subSection.subtitle}</Text>
-                <Text style={styles.text}>{subSection.organization}</Text>
-              </View>
-              {subSection.details &&
-                subSection.details.split("\n").map((item: any, index: number) => (
-                  <View key={index} style={styles.listContent}>
-                    <Text>{"\u2022"}</Text>
-                    <Text style={styles.listItem}>{item}</Text>
-                  </View>
-                ))}
+              <Text style={styles.subtitleColor}>{subSection.organization}</Text>
             </View>
           </View>
+          {subSection.details &&
+            subSection.details.split("\n").map((item: any, index: number) => (
+              <View key={index} style={styles.detailsContent}>
+                <View style={{ ...styles.leftColumn, ...styles.listFontWeight, ...styles.commonLineHeight }}>
+                  <Text>&nbsp;</Text>
+                </View>
+                <View style={styles.rightColumn}>
+                  <View style={styles.listContent}>
+                    <Text style={styles.commonLineHeight}>{"\u2022"}</Text>
+                    <Text style={styles.listItem}>{item}</Text>
+                  </View>
+                </View>
+              </View>
+            ))}
         </View>
       ))}
     </View>

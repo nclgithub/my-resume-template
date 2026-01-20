@@ -4,17 +4,18 @@ import { RefObject } from "react";
 
 const styles = StyleSheet.create({
   sectionMain: {
-    display: "flex",
     paddingLeft: 36,
     paddingRight: 36,
     paddingBottom: 6
   },
   dividerRow: {
+    display: "flex",
     flexDirection: "row"
   },
   dividerSmall: {
     flexBasis: "25%",
     borderTopWidth: 2,
+    borderStyle: "solid",
     borderTopColor: "#c6c9ce",
     flexShrink: 0,
     marginRight: 12
@@ -22,9 +23,11 @@ const styles = StyleSheet.create({
   dividerLarge: {
     flex: 1,
     borderTopWidth: 2,
+    borderStyle: "solid",
     borderTopColor: "#c6c9ce"
   },
   contentRow: {
+    display: "flex",
     flexDirection: "row",
     paddingTop: 12
   },
@@ -41,23 +44,30 @@ const styles = StyleSheet.create({
     minWidth: 0
   },
   listContent: {
+    display: "flex",
     flexDirection: "row",
     marginLeft: 3
+  },
+  listDot: {
+    lineHeight: 0.9
   },
   listItem: {
     marginLeft: 4,
     wordBreak: "break-word",
+    flexGrow: 1,
+    flexBasis: 0,
     lineHeight: 0.9,
     textAlign: "justify"
   },
   secondContentRow: {
+    display: "flex",
     flexDirection: "row",
     flexWrap: "wrap"
   },
   secondContentDetails: {
     flex: 1,
     minWidth: 0
-  }
+  },
 });
 
 export default function TemplateOneSectionOne({ section, isFirst }: { section: PointFormSection; isFirst: boolean }) {
@@ -83,7 +93,7 @@ export default function TemplateOneSectionOne({ section, isFirst }: { section: P
               .slice(0, 1)
               .map((item: any, index: number) => (
                 <View key={index} style={styles.listContent}>
-                  <Text>{"\u2022"}</Text>
+                  <Text style={styles.listDot}>{"\u2022"}</Text>
                   <Text key={index} style={styles.listItem}>
                     {item}
                   </Text>
@@ -92,21 +102,21 @@ export default function TemplateOneSectionOne({ section, isFirst }: { section: P
           </View>
         </View>
       </View>
-      <View style={styles.secondContentRow}>
-        <View style={styles.sectionTitle} />
-        <View style={styles.secondContentDetails}>
-          {section.details &&
-            section.details
-              .split("\n")
-              .slice(1)
-              .map((item: any, index: number) => (
+      {section.details &&
+        section.details
+          .split("\n")
+          .slice(1)
+          .map((item: any, index: number) => (
+            <View style={styles.secondContentRow}>
+              <View style={styles.sectionTitle}><Text>&nbsp;</Text></View>
+              <View style={styles.secondContentDetails}>
                 <View key={index} style={styles.listContent} wrap={false}>
-                  <Text>{"\u2022"}</Text>
+                  <Text style={styles.listDot}>{"\u2022"}</Text>
                   <Text style={styles.listItem}>{item}</Text>
                 </View>
-              ))}
-        </View>
-      </View>
+              </View>
+            </View>
+          ))}
     </View>
   );
 }

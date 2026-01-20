@@ -3,17 +3,18 @@ import { ThreeColumnGridSection } from "@/param/datatype";
 
 const styles = StyleSheet.create({
   sectionMain: {
-    display: "flex",
     paddingLeft: 36,
     paddingRight: 36,
     paddingBottom: 6
   },
   dividerRow: {
+    display: "flex",
     flexDirection: "row"
   },
   dividerSmall: {
     flexBasis: "25%",
     borderTopWidth: 2,
+    borderStyle: "solid",
     borderTopColor: "#c6c9ce",
     flexShrink: 0,
     marginRight: 12
@@ -21,9 +22,11 @@ const styles = StyleSheet.create({
   dividerLarge: {
     flex: 1,
     borderTopWidth: 2,
+    borderStyle: "solid",
     borderTopColor: "#c6c9ce"
   },
   contentRow: {
+    display: "flex",
     flexDirection: "row",
     paddingTop: 12
   },
@@ -38,6 +41,7 @@ const styles = StyleSheet.create({
   sectionDetails: {
     flex: 1,
     minWidth: 0,
+    display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     marginLeft: 2
@@ -50,11 +54,26 @@ const styles = StyleSheet.create({
     textAlign: "justify"
   },
   secondContentRow: {
+    display: "flex",
     flexDirection: "row"
   }
 });
 
 export default function TemplateOneSectionTwo({ section, isFirst }: { section: ThreeColumnGridSection; isFirst: boolean }) {
+  const eachRowDetails = [];
+
+  if (section.details) {
+    let temp = [];
+    for (const detail of section.details.split(",")) {
+      temp.push(detail);
+      if (temp.length === 3) {
+        eachRowDetails.push(temp);
+        temp = [];
+      }
+    }
+    if (temp.length > 0) eachRowDetails.push(temp);
+  }
+
   const Separator = () =>
     !isFirst && (
       <View style={styles.dividerRow}>
@@ -72,32 +91,28 @@ export default function TemplateOneSectionTwo({ section, isFirst }: { section: T
             <Text>{section.title}</Text>
           </View>
           <View style={styles.sectionDetails}>
-            {section.details &&
-              section.details
-                .split(",")
-                .slice(0, 3)
-                .map((item, index) => (
-                  <Text key={index} style={styles.itemBox}>
-                    {item}
-                  </Text>
-                ))}
-          </View>
-        </View>
-      </View>
-      <View style={styles.secondContentRow}>
-        <View style={styles.sectionTitle}></View>
-        <View style={styles.sectionDetails}>
-          {section.details &&
-            section.details
-              .split(",")
-              .slice(3)
-              .map((item, index) => (
+            {eachRowDetails &&
+              eachRowDetails[0].map((item, index) => (
                 <Text key={index} style={styles.itemBox}>
                   {item}
                 </Text>
               ))}
+          </View>
         </View>
       </View>
+      {eachRowDetails &&
+        eachRowDetails.slice(1).map((details, index) => (
+          <View style={styles.secondContentRow} wrap={false}>
+            <View style={styles.sectionTitle}><Text>&nbsp;</Text></View>
+            <View style={styles.sectionDetails}>
+              {details.map((item, subindex) => (
+                <Text key={subindex} style={styles.itemBox}>
+                  {item}
+                </Text>
+              ))}
+            </View>
+          </View>
+        ))}
     </View>
   );
 }

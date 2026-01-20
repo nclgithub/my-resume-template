@@ -3,17 +3,18 @@ import { SectionData } from "@/param/datatype";
 
 const styles = StyleSheet.create({
   sectionMain: {
-    display: "flex",
     paddingLeft: 36,
     paddingRight: 36,
     paddingBottom: 12
   },
   dividerRow: {
+    display: "flex",
     flexDirection: "row"
   },
   dividerSmall: {
     flexBasis: "25%",
     borderTopWidth: 2,
+    borderStyle: "solid",
     borderTopColor: "#c6c9ce",
     flexShrink: 0,
     marginRight: 12
@@ -21,11 +22,14 @@ const styles = StyleSheet.create({
   dividerLarge: {
     flex: 1,
     borderTopWidth: 2,
+    borderStyle: "solid",
     borderTopColor: "#c6c9ce"
   },
   contentRow: {
+    display: "flex",
     flexDirection: "row",
-    paddingVertical: 12,
+    paddingTop: 12,
+    paddingBottom: 12,
     flexWrap: "wrap"
   },
   leftColumn: {
@@ -34,14 +38,15 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     textTransform: "uppercase",
     color: "#8675A9",
-    marginRight: 12
+    marginRight: 12,
   },
   rightColumn: {
     flex: 1,
+    display: "flex",
+    flexDirection: "row",
     flexWrap: "wrap",
     marginTop: -12,
     minWidth: 0,
-    flexDirection: "row",
     marginLeft: 2
   },
   skillItem: {
@@ -51,6 +56,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap"
   },
   skillRow: {
+    display: "flex",
     flexDirection: "row",
     alignItems: "flex-start",
     marginBottom: 4
@@ -65,6 +71,7 @@ const styles = StyleSheet.create({
     whiteSpace: "nowrap"
   },
   skillBarRow: {
+    display: "flex",
     flexDirection: "row",
     marginTop: 4,
     width: "100%"
@@ -82,6 +89,7 @@ const styles = StyleSheet.create({
     marginRight: 2
   },
   secondContentRow: {
+    display: "flex",
     flexDirection: "row",
     flexWrap: "wrap"
   }

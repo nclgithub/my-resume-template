@@ -5,69 +5,60 @@ import TemplateOneSectionTwo from "./section-two";
 import TemplateOneSectionThree from "./section-three";
 import TemplateOneSectionFour from "./section-four";
 import TemplateOneSectionFive from "./section-five";
+import { SuppressResumePDFErrorMessage } from "../SuppressResumePDFErrorMessage";
 
 const styles = StyleSheet.create({
-  wrapper: {
+  main: {
+    display: "flex",
+    flexDirection: "column",
+    paddingTop: 40,
+    paddingBottom: 40,
     backgroundColor: "#FFFFFF",
-    margin: "auto",
-    fontSize: 10,
-    width: "100%",
-    flex: 1,
+    fontSize: 10
   },
   content: {
+    display: "flex",
+    flexDirection: "column",
     overflow: "hidden",
     color: "#000000",
     marginTop: -40
   },
-  headerContainer: {
+  headerContent: {
     position: "relative",
-    paddingHorizontal: 48,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 36,
     marginBottom: 12,
     fontSize: 18,
     fontWeight: 600,
-    color: "#8675A9"
-  },
-  overlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "#8675A9",
-    opacity: 0.1
-  },
-  headerContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 48
+    color: "#8675A9",
+    backgroundColor: "rgb(134, 117, 169, 0.1)"
   },
   profilePic: {
     position: "absolute",
-    right: 48,
-    top: 24,
-    width: 180,
-    height: 180,
-    borderRadius: 90,
-    objectFit: "cover"
+    right: 36,
+    top: 20,
+    width: 130,
+    height: 130,
+    borderRadius: 90
   }
 });
 
 Font.registerHyphenationCallback(word => [word]);
 
-export default function ResumeTemplateOne({ data }: { data: TemplateData }) {
+export default function ResumeTemplateOne({ data, isPrint = true }: { data: TemplateData; isPrint?: boolean }) {
   return (
-    <Document>
-      <Page size="A4" style={{ paddingVertical: 40 }}>
-        <View style={styles.wrapper}>
+    <>
+      <Document>
+        <Page size="A4" style={styles.main}>
           <View style={styles.content}>
-            <View style={styles.headerContainer}>
-              <View style={styles.overlay} />
-              <View style={styles.headerContent}>
-                <Text>
-                  {data?.firstname} {data?.lastname}
-                </Text>
-              </View>
-              {data?.profilepic && <Image src={data.profilepic} style={styles.profilePic} />}
+            <View style={styles.headerContent}>
+              <Text>
+                {data?.firstname} {data?.lastname}
+              </Text>
+              {data?.profilepic &&
+                (isPrint ? <Image src={data.profilepic} style={styles.profilePic} /> : <img src={data.profilepic} style={styles.profilePic} />)}
             </View>
             {data?.sections?.map((section, sectionindex) => {
               const isFirst = sectionindex === 0;
@@ -79,7 +70,7 @@ export default function ResumeTemplateOne({ data }: { data: TemplateData }) {
                 return <TemplateOneSectionTwo key={sectionindex} section={section} isFirst={isFirst} />;
               }
               if (section.type === "3") {
-                return <TemplateOneSectionThree key={sectionindex} section={section} isFirst={isFirst} />;
+                return <TemplateOneSectionThree key={sectionindex} section={section} isFirst={isFirst} isPrint={isPrint} />;
               }
               if (section.type === "4") {
                 return <TemplateOneSectionFour key={sectionindex} section={section} isFirst={isFirst} />;
@@ -89,8 +80,9 @@ export default function ResumeTemplateOne({ data }: { data: TemplateData }) {
               }
             })}
           </View>
-        </View>
-      </Page>
-    </Document>
+        </Page>
+      </Document>
+      <SuppressResumePDFErrorMessage />
+    </>
   );
 }

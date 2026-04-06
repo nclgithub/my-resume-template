@@ -97,9 +97,9 @@ export default function ResumePDF() {
       sections: prev.sections.map(section =>
         section.id === id
           ? {
-              ...section,
-              contents: section.contents.filter((_: any, i: number) => i !== index)
-            }
+            ...section,
+            contents: section.contents.filter((_: any, i: number) => i !== index)
+          }
           : section
       )
     }));
